@@ -1,6 +1,29 @@
 const Net = require('net')
 const Modbus = require('jsmodbus')
 
+let add = (x, y) => x + y,
+    sub = (x, y) => x - y,
+    mul = (x, y) => x * y,
+    div = (x, y) => x / y;
+
+const mathOperationsMap = {
+  '+': add,
+  '-': sub,
+  '*': mul,
+  '/': div
+}
+
+function doCorrection(val, correctionString) {
+  let result = val
+  const mathLiteral = correctionString[0],
+        number = Number.parseFloat(correctionString.slice(1))
+  if (mathLiteral in mathOperationsMap) {
+    const mathAction = mathOperationsMap[mathLiteral];
+    result = mathAction(val, number);
+  }
+  return result
+}
+
 var Homebridge, Service, Characteristic, UUIDGen, Log, logFile;
 module.exports = function (api) {
   Homebridge = api;
@@ -307,6 +330,9 @@ class ModbusAccessory {
     }
     if ('map' in map && (val.toString() in map.map)) {
       val = map.map[val.toString()];
+    }
+    if ('correction' in map) {
+      val = doCorrection(val, map.correction);
     }
     if (characteristic.props.format == 'bool') {
       val = val ? true : false;
