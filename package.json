@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-modbus",
+  "name": "homebridge-modbus-2",
   "version": "1.0.0",
   "description": "HomeBridge Plugin for ModbusTCP",
   "keywords": [
@@ -11,11 +11,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sclavel/homebridge-modbus.git"
+    "url": "git://github.com/berkus/homebridge-modbus.git"
   },
   "author": {
-    "name": "Stephane Clavel",
-    "email": "stephane.clavel@gmail.com"
+    "name": "Berkus Decker",
+    "email": "berkus+homebridge@gmail.com",
+    "url": "https://metta.systems"
   },
   "dependencies": {
     "jsmodbus": ">=3.0.0"
