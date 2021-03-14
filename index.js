@@ -82,7 +82,6 @@ class ModbusPlatform {
     });
 
     this.socket.on('modbus', this.onQueue.bind(this));
-
   }
 
   accessories(callback) {
@@ -108,10 +107,9 @@ class ModbusPlatform {
   }
 
   update() {
-
     if (this.command) {
       if (Date.now() > this.commandTime + 10000) {
-        Log("ERROR: command queue got stuck !");
+        Log("ERROR: command queue got stuck!");
         this.reset();
         return;
       }
@@ -127,7 +125,6 @@ class ModbusPlatform {
     this.commands.push({"cmd":'x'});
 
     this.socket.emit('modbus');
-
   }
 
   writeModbus(type, add, val, map) {
@@ -173,7 +170,6 @@ class ModbusPlatform {
       if (this.commands.length)
         this.socket.emit('modbus');
     }
-
   }
 
   reset() {
@@ -184,7 +180,6 @@ class ModbusPlatform {
     this.command = null;
     this.socket.end();    
   }
-
 }
 
 class ModbusAccessory {
