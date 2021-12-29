@@ -288,6 +288,9 @@ class ModbusAccessory {
             if (characteristic.props.format == 'bool') {
               val = val ? 1 : 0;
             }
+            if('writeCorrection' in modbusMap){
+                          val = doCorrection(val, modbusMap.writeCorrection);           
+            }
             if ('map' in modbusMap) {
               for (let v1 in modbusMap.map) {
                 if (modbusMap.map[v1] == val) {
